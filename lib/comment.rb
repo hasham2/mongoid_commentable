@@ -8,7 +8,7 @@ module Mongoid_Commentable
       base.field :parent, :type => String
       base.field :deleted_at, :type => Time
       base.embedded_in :commentable, :polymorphic => true, :inverse_of => :comments
-      base.belongs_to :users
+      base.referenced_in :user
     end
 
     def level
