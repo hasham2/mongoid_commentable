@@ -32,6 +32,7 @@ module Mongoid_Commentable
         user.send attr
       else
         raise ArgumentError, "User model must have #{attr} attribute"
+      end
     end
     
   end
