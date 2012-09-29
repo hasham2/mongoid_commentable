@@ -8,6 +8,7 @@ module Mongoid_Commentable
       base.field :parent, :type => String
       base.field :deleted_at, :type => Time
       base.embedded_in :commentable, :polymorphic => true, :inverse_of => :comments
+      base.belongs_to :users
     end
 
     def level
@@ -24,6 +25,13 @@ module Mongoid_Commentable
 
     def deleted?
       !!self.deleted_at
+    end
+
+    def author(attr = :name)
+      if User.respond_to? attr
+        user.send attr
+      else
+        raise ArgumentError, "User model must have #{attr} attribute"
     end
     
   end
