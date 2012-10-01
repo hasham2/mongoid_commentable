@@ -23,7 +23,7 @@ class CommentsController < ActionController::Base
   end
 
   def create
-    @comment = @model.create_comment!(params[:comment])
+    @comment = @model.create_comment!(params[:comment], current_user)
     if @comment.save
       flash[:notice] = 'Comment was successfully created.'
     else

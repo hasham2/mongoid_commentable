@@ -12,8 +12,9 @@ module Mongoid::Commentable
     end
   end
     
-  def create_comment!(params)
+  def create_comment!(params, user = nil)
     comment = comments.create!(params)
+    comment.user = user unless user.nil?
     comment.path = comment.parent ? comments.find(comment.parent).path + '.' + comment.id.to_s : "root."+comment.id.to_s
     comment
   end
